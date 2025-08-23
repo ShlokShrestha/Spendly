@@ -5,30 +5,18 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "../ui/card";
 import Link from "next/link";
+import { SignUpFormValues, UseFormProps } from "@/interface/interface";
 
-type FormValues = {
-  username: string;
-  email: string;
-  password: string;
-};
+interface SignUpProps extends UseFormProps<SignUpFormValues> {
+  handleSignUp: (data: SignUpFormValues) => void;
+}
 
-const SignUp = () => {
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>({
-    defaultValues: {
-      username: "",
-      email: "",
-      password: "",
-    },
-  });
-
-  const onSubmit = (data: FormValues) => {
-    console.log("Form Data:", data);
-  };
-
+const SignUp = ({
+  handleSubmit,
+  errors,
+  control,
+  handleSignUp,
+}: SignUpProps) => {
   return (
     <div className="flex justify-center items-center h-[90vh]">
       <Card className="w-full max-w-sm">
@@ -39,27 +27,27 @@ const SignUp = () => {
           </p>
         </div>
         <CardContent>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
+          <form onSubmit={handleSubmit(handleSignUp)} className="space-y-3">
             <div className="space-y-2">
-              <Label htmlFor="username">Username</Label>
+              <Label htmlFor="fullName">Full Name</Label>
               <Controller
-                name="username"
+                name="fullName"
                 control={control}
                 rules={{
-                  required: "Username is required",
+                  required: "Full Name is required",
                   minLength: { value: 3, message: "Minimum 3 characters" },
                 }}
                 render={({ field }) => (
                   <Input
                     {...field}
                     id="username"
-                    placeholder="Enter username"
+                    placeholder="Enter fullName"
                   />
                 )}
               />
-              {errors.username && (
+              {errors.fullName && (
                 <p className="text-red-500 text-sm">
-                  {errors.username.message}
+                  {errors.fullName.message}
                 </p>
               )}
             </div>

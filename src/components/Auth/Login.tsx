@@ -1,32 +1,21 @@
 "use client";
-import { useForm, Controller } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "../ui/card";
 import Link from "next/link";
+import { LoginFormValues, UseFormProps } from "@/interface/interface";
+import { Controller } from "react-hook-form";
 
-type FormValues = {
-  email: string;
-  password: string;
-};
-
-export default function Login() {
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>({
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
-
-  const onSubmit = (data: FormValues) => {
-    console.log("Form Data:", data);
-  };
-
+interface LoginProps extends UseFormProps<LoginFormValues> {
+  handleLogin: (data: LoginFormValues) => void;
+}
+export default function Login({
+  handleSubmit,
+  errors,
+  control,
+  handleLogin,
+}: LoginProps) {
   return (
     <div className="flex justify-center items-center h-[90vh]">
       <Card className="w-full max-w-sm">
@@ -37,7 +26,7 @@ export default function Login() {
           </p>
         </div>
         <CardContent>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
+          <form onSubmit={handleSubmit(handleLogin)} className="space-y-3">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Controller

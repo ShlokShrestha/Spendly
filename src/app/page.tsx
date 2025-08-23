@@ -1,9 +1,9 @@
-import LoginIn from "@/components/Auth/Login";
+import Login from "./(Auth)/login/page";
 
 export default function Home() {
   return (
     <>
-      <LoginIn />
+      <Login />
     </>
   );
 }
