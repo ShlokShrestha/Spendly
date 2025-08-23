@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import { prisma } from "@/lib/prisma";
 
 export async function POST(req: Request) {
-  const JWT_SECRET = process.env.JWT_SECRET || "";
+  const JWT_SECRET = process.env.JWT_SECRET;
   try {
     const { email, password } = await req.json();
 
