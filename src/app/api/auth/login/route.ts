@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import { prisma } from "@/lib/prisma";
 
 export async function POST(req: Request) {
-  const JWT_SECRET = process.env.JWT_SECRET;
+  const JWT_SECRET = process.env.JWT_SECRET_KEY;
   try {
     const { email, password } = await req.json();
 
@@ -27,7 +27,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "No jwt secret key" }, { status: 401 });
     }
     const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, {
-      expiresIn: "1h",
+      expiresIn: "7d",
     });
 
     return NextResponse.json({ token });
