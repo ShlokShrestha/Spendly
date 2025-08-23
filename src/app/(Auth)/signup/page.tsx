@@ -23,7 +23,7 @@ export default function Login() {
   const handleSignUp = async (data: SignUpFormValues) => {
     try {
       const res = await axios.post("/api/auth/signup/", data);
-      if (res.status === 201) {
+      if (res.status === 200) {
         router.replace("/login");
       }
     } catch (err: any) {
