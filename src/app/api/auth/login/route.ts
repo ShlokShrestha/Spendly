@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import jwt, { SignOptions } from "jsonwebtoken";
 import { prisma } from "@/lib/prisma";
 
 export async function POST(req: Request) {
@@ -15,7 +15,6 @@ export async function POST(req: Request) {
         { status: 401 }
       );
     }
-
     const isValid = await bcrypt.compare(password, user.password);
     if (!isValid) {
       return NextResponse.json(
@@ -26,9 +25,14 @@ export async function POST(req: Request) {
     if (!JWT_SECRET) {
       return NextResponse.json({ error: "No jwt secret key" }, { status: 401 });
     }
-    const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, {
-      expiresIn: "7d",
-    });
+    const token = jwt.sign(
+      { id: user.id, email: user.email },
+      JWT_SECRET as string, 
+      {
+        expiresIn: (process.env.JWT_EXPIRES_IN ??
+          "7d") as SignOptions["expiresIn"], 
+      }
+    );
 
     return NextResponse.json({ token });
   } catch (error) {
