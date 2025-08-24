@@ -13,7 +13,6 @@ export default function Login() {
     control,
     handleSubmit,
     formState: { errors },
-    setError,
   } = useForm<LoginFormValues>({
     defaultValues: {
       email: "",
@@ -22,7 +21,7 @@ export default function Login() {
   });
   const handleLogin = async (data: LoginFormValues) => {
     try {
-      const res = await fetch("/api/auth/login", {
+      const res = await fetch("/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

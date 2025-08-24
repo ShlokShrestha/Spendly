@@ -84,7 +84,7 @@ export default function Login({
               Forgot your password?
             </Link>
             <Button type="submit" className="w-full">
-              Login In
+              Login
             </Button>
           </form>
           <div className="text-center mt-4">
