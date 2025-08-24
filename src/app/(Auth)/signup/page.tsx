@@ -11,7 +11,6 @@ export default function Login() {
     control,
     handleSubmit,
     formState: { errors },
-    setError,
   } = useForm<SignUpFormValues>({
     defaultValues: {
       fullName: "",

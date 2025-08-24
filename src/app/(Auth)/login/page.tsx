@@ -35,7 +35,7 @@ export default function Login() {
       }
       router.replace("/");
     } catch (err: any) {
-      toast.error(err.response?.data?.error || "Server error");
+      toast.error(err.message || "Server error");
     }
   };
   return (
