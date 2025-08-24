@@ -1,9 +1,9 @@
 "use client";
 import SignUp from "@/components/Auth/SignUp";
 import { SignUpFormValues } from "@/interface/interface";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const router = useRouter();
@@ -22,22 +22,20 @@ export default function Login() {
 
   const handleSignUp = async (data: SignUpFormValues) => {
     try {
-      const res = await axios.post("/api/auth/signup/", data);
-      if (res.status === 200) {
-        router.replace("/login");
+      const res = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.error || "Server error");
       }
+      router.replace("/login");
     } catch (err: any) {
-      if (err.response?.data?.field && err.response?.data?.message) {
-        setError(err.response.data.field, {
-          type: "manual",
-          message: err.response.data.message,
-        });
-      } else {
-        setError("email", {
-          type: "manual",
-          message: err.response?.data?.error || "Server error",
-        });
-      }
+      toast.error(err.message);
     }
   };
   return (
