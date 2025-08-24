@@ -20,6 +20,7 @@ export default function Login() {
     },
   });
   const handleLogin = async (data: LoginFormValues) => {
+    setLoading(true);
     try {
       const res = await fetch("/api/login", {
         method: "POST",
@@ -36,6 +37,8 @@ export default function Login() {
       router.replace("/");
     } catch (err: any) {
       toast.error(err.message || "Server error");
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -45,6 +48,7 @@ export default function Login() {
         errors={errors}
         control={control}
         handleLogin={handleLogin}
+        loading={loading}
       />
     </>
   );

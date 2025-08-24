@@ -6,9 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "../ui/card";
 import Link from "next/link";
 import { SignUpFormValues, UseFormProps } from "@/interface/interface";
-
+import Spinner from "../Spinner";
 interface SignUpProps extends UseFormProps<SignUpFormValues> {
   handleSignUp: (data: SignUpFormValues) => void;
+  loading: boolean;
 }
 
 const SignUp = ({
@@ -16,6 +17,7 @@ const SignUp = ({
   errors,
   control,
   handleSignUp,
+  loading,
 }: SignUpProps) => {
   return (
     <div className="flex justify-center items-center h-[90vh]">
@@ -102,7 +104,7 @@ const SignUp = ({
               )}
             </div>
             <Button type="submit" className="w-full">
-              Sign Up
+              {loading ? <Spinner /> : ""} Sign Up
             </Button>
           </form>
           <div className="text-center mt-4">

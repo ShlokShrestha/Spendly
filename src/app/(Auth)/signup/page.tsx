@@ -2,11 +2,13 @@
 import SignUp from "@/components/Auth/SignUp";
 import { SignUpFormValues } from "@/interface/interface";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 export default function Login() {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const {
     control,
     handleSubmit,
@@ -20,6 +22,7 @@ export default function Login() {
   });
 
   const handleSignUp = async (data: SignUpFormValues) => {
+    setLoading(true);
     try {
       const res = await fetch("/api/signup", {
         method: "POST",
@@ -35,6 +38,8 @@ export default function Login() {
       router.replace("/login");
     } catch (err: any) {
       toast.error(err.message);
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -44,6 +49,7 @@ export default function Login() {
         errors={errors}
         control={control}
         handleSignUp={handleSignUp}
+        loading={loading}
       />
     </>
   );

@@ -6,15 +6,18 @@ import { Card, CardContent } from "../ui/card";
 import Link from "next/link";
 import { LoginFormValues, UseFormProps } from "@/interface/interface";
 import { Controller } from "react-hook-form";
+import Spinner from "../Spinner";
 
 interface LoginProps extends UseFormProps<LoginFormValues> {
   handleLogin: (data: LoginFormValues) => void;
+  loading: boolean;
 }
 export default function Login({
   handleSubmit,
   errors,
   control,
   handleLogin,
+  loading,
 }: LoginProps) {
   return (
     <div className="flex justify-center items-center h-[90vh]">
@@ -84,7 +87,7 @@ export default function Login({
               Forgot your password?
             </Link>
             <Button type="submit" className="w-full">
-              Login
+              {loading ? <Spinner /> : ""} Login
             </Button>
           </form>
           <div className="text-center mt-4">
