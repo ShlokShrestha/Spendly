@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import bcrypt from "bcrypt";
 import jwt, { SignOptions } from "jsonwebtoken";
 import { prisma } from "@/lib/prisma";
+import bcrypt from "bcryptjs";
 
 export async function POST(req: Request) {
   const JWT_SECRET = process.env.JWT_SECRET_KEY;
