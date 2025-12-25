@@ -5,7 +5,7 @@ const TabBar = () => {
     <div className="grid grid-cols-4 text-xs">
       <TabItem href="/dashboard" label="Dashboard" icon="🏠" />
       <TabItem href="/dashboard/expense" label="Expense" icon="💳" />
-      <TabItem href="/dashboard/approval" label="Approval" icon="✅" />
+      <TabItem href="/dashboard/transaction" label="transaction" icon="✅" />
       <TabItem href="/dashboard/setting" label="Setting" icon="⚙️" />
     </div>
   );
