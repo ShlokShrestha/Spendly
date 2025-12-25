@@ -31,7 +31,7 @@ export default function Login({
         />
         <div className="w-full ">
           <div className="flex flex-col items-center text-center mb-4">
-            <h1 className="text-2xl font-bold text-blue-800">Welcome back</h1>
+            <h1 className="text-2xl font-bold text-primary">Welcome back</h1>
             <p className="text-xl">
               Login to your Spendly
             </p>
@@ -94,17 +94,17 @@ export default function Login({
               >
                 Forgot your password?
               </Link>
-              <Button type="submit" className="w-full bg-blue-800">
+              <Button type="submit" className="w-full ">
                 {loading ? <Spinner /> : ""} Login
               </Button>
             </form>
             <div className="text-center mt-4">
-              <span className="text-sm text-gray-600">
+              <span className="text-sm ">
                 Don't have an account?{" "}
               </span>
               <Link
                 href="/signup"
-                className="text-sm text-blue-800 hover:underline"
+                className="text-sm hover:underline text-primary"
               >
                 Sign Up
               </Link>
