@@ -1,22 +1,26 @@
-"use client";
+import { cookies } from "next/headers";
 
-import { useRouter } from "next/navigation";
-
-export default function Dashboard() {
-  const router = useRouter();
-  const handleLogout = async () => {
-    await fetch("/api/logout", { method: "POST" });
-    router.replace("/login");
-  };
+export default async function DashboardPage() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token")?.value;
+  if (!token) {
+    return <p>Please login first.</p>;
+  }
+  const res = await fetch(`${process.env.BASE_URL}/api/me`, {
+    headers: {
+      cookie: `token=${token}`,
+    },
+    cache: "no-store",
+  });
+  if (!res.ok) {
+    return <p>Failed to fetch user profile</p>;
+  }
+  const data = await res.json();
+  const user = data.user;
   return (
     <div>
-      <h1>Dashboard</h1>
-      <button
-        className="bg-red-500 text-white px-4 py-2 rounded"
-        onClick={handleLogout}
-      >
-        Logout
-      </button>
+      <h1>Welcome, {user.fullName}</h1>
+      <p>Email: {user.email}</p>
     </div>
   );
 }

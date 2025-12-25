@@ -12,12 +12,6 @@ export default function DashboardLayout({
         <AppSidebar />
       </aside>
       <div className="flex-1 flex flex-col">
-        <header className="flex items-center justify-between p-6 bg-background">
-          <div>
-            <h2 className="text-2xl font-semibold">Hello, Christian</h2>
-            <p className="text-sm text-muted-foreground">July 7, 2023</p>
-          </div>
-        </header>
         <main className="flex-1 p-6 pb-20">{children}</main>
       </div>
       <nav className="fixed bottom-0 left-0 right-0 z-50 border-t bg-background md:hidden">
