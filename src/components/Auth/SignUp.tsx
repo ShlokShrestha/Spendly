@@ -31,7 +31,7 @@ const SignUp = ({
         />
         <div className="w-full ">
           <div className="flex flex-col items-center text-center mb-4">
-            <h1 className="text-2xl font-bold text-blue-800">Welcome back</h1>
+            <h1 className="text-2xl font-bold text-primary">Welcome back</h1>
             <p className="text-xl">Sign Up to your Spendly</p>
           </div>
           <CardContent>
@@ -109,7 +109,7 @@ const SignUp = ({
                   </p>
                 )}
               </div>
-              <Button type="submit" className="w-full bg-blue-800">
+              <Button type="submit" className="w-full">
                 {loading ? <Spinner /> : ""} Sign Up
               </Button>
             </form>
@@ -119,7 +119,7 @@ const SignUp = ({
               </span>
               <Link
                 href="/login"
-                className="text-sm text-blue-800 hover:underline"
+                className="text-sm text-primary hover:underline"
               >
                 Login
               </Link>
