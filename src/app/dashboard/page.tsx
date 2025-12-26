@@ -1,4 +1,5 @@
 import { cookies } from "next/headers";
+import Dashboard from "@/components/Dashboard/Dashboard";
 
 export default async function DashboardPage() {
   const cookieStore = await cookies();
@@ -21,6 +22,7 @@ export default async function DashboardPage() {
     <div>
       <h1>Welcome, {user.fullName}</h1>
       <p>Email: {user.email}</p>
+      <Dashboard />
     </div>
   );
 }
