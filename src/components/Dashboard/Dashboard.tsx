@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import AddExpenses from "./AddExpenses";
 
 function StatCard({ title, value, progress }: any) {
@@ -10,7 +9,6 @@ function StatCard({ title, value, progress }: any) {
       </CardHeader>
       <CardContent>
         <div className="text-xl font-bold mb-2">{value}</div>
-        <Progress value={progress} />
       </CardContent>
     </Card>
   );
